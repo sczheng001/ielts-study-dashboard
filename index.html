@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A personal IELTS study dashboard for tracking progress toward band 8.0.">
+  <title>IELTS Study Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="IELTS dashboard home">
+      <span class="brand-mark">IE</span>
+      <span>IELTS<span class="brand-light">Flow</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a class="active" href="#home">Overview</a>
+      <a href="#listening">Listening</a>
+      <a href="#reading">Reading</a>
+      <a href="#writing">Writing</a>
+      <a href="#speaking">Speaking</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+        <span class="notification-dot"></span>
+      </button>
+      <div class="avatar" aria-label="Profile">AL</div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="welcome section-wrap">
+      <div>
+        <p class="eyebrow" id="today-date">Wednesday, 19 August</p>
+        <h1>Good morning, Alex <span aria-hidden="true">👋</span></h1>
+        <p>Small steps every day. You're getting closer to your goal.</p>
+      </div>
+      <button class="primary-btn" id="open-session">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Log study session
+      </button>
+    </section>
+
+    <section class="stats-grid section-wrap" aria-label="Study summary">
+      <article class="stat-card target-card">
+        <div class="stat-icon purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m14 10 6-6m0 0h-4m4 0v4"/></svg></div>
+        <div><span>Target band</span><strong>8.0</strong><small>Your goal</small></div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon orange"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <div><span>Study time today</span><strong id="today-time">1h 25m</strong><small class="positive">↑ 15m from yesterday</small></div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon coral"><svg viewBox="0 0 24 24"><path d="M12 22c4-2 7-5 7-10 0-3-2-7-5-9 0 3-2 5-3 6 0-2-1-3-2-4-1 3-4 5-4 9 0 4 3 7 7 8Z"/><path d="M10 18c-1-2 0-4 2-6 0 2 2 3 2 5 0 1-1 2-2 3"/></svg></div>
+        <div><span>Current streak</span><strong><span id="streak">12</span> days</strong><small>Personal best: 18 days</small></div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg></div>
+        <div><span>Weekly progress</span><strong id="weekly-hours">7.5 hrs</strong><small><span class="positive">75%</span> of 10 hour goal</small></div>
+      </article>
+    </section>
+
+    <section class="dashboard-grid section-wrap">
+      <article class="panel tasks-panel">
+        <div class="panel-heading">
+          <div><h2>Today's tasks</h2><p>Keep the momentum going</p></div>
+          <button class="text-btn" id="add-task">+ Add task</button>
+        </div>
+        <div id="task-list" class="task-list"></div>
+        <div class="task-summary"><span id="task-summary-text">2 of 4 completed</span><div class="progress-track"><span id="task-progress"></span></div></div>
+      </article>
+
+      <article class="panel weekly-panel">
+        <div class="panel-heading">
+          <div><h2>Weekly activity</h2><p>Your study time this week</p></div>
+          <button class="more-btn" aria-label="More options">•••</button>
+        </div>
+        <div class="chart" id="weekly-chart" aria-label="Study minutes by day"></div>
+        <div class="chart-summary"><div><strong>7h 30m</strong><span>Total this week</span></div><div><strong>1h 4m</strong><span>Daily average</span></div></div>
+      </article>
+    </section>
+
+    <section class="skills section-wrap">
+      <div class="section-title"><div><h2>Your skills</h2><p>Track your estimated band score</p></div><span class="target-pill">Target: 8.0</span></div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </section>
+
+    <section class="practice section-wrap" aria-labelledby="practice-title">
+      <div class="section-title"><div><h2 id="practice-title">Practice &amp; notes</h2><p>Record results and reflect on every session</p></div></div>
+      <div class="practice-tabs" role="tablist" aria-label="IELTS skills">
+        <button class="active" role="tab" data-skill="listening">Listening</button>
+        <button role="tab" data-skill="reading">Reading</button>
+        <button role="tab" data-skill="writing">Writing</button>
+        <button role="tab" data-skill="speaking">Speaking</button>
+      </div>
+      <form class="practice-form" id="practice-form">
+        <div class="form-grid">
+          <label>Practice type<select id="practice-type"></select></label>
+          <label>Result / band score<input id="practice-score" type="number" min="0" max="9" step="0.5" placeholder="e.g. 7.5" required></label>
+          <label>Date<input id="practice-date" type="date" required></label>
+        </div>
+        <label>Notes<textarea id="practice-notes" rows="3" placeholder="What went well? What would you like to improve?"></textarea></label>
+        <button class="primary-btn" type="submit">Save practice result</button>
+      </form>
+      <div id="recent-results" class="recent-results"></div>
+    </section>
+  </main>
+
+  <dialog id="session-dialog">
+    <form method="dialog" id="session-form">
+      <div class="modal-heading"><div><h2>Log study session</h2><p>Add the time you studied today.</p></div><button value="cancel" class="close-btn" aria-label="Close">×</button></div>
+      <label>Skill<select id="session-skill"><option>Listening</option><option>Reading</option><option>Writing</option><option>Speaking</option></select></label>
+      <label>Minutes studied<input id="session-minutes" type="number" min="1" max="600" value="30" required></label>
+      <button class="primary-btn full" value="default">Save session</button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
